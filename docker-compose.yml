@@ -1,0 +1,34 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - ${mongodb_PORT}:27017
+    env_file: .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${mongodb_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${mongodb_PASSWORD}
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    env_file: .env
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${mongodb_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${mongodb_PASSWORD}
+  app:
+    env_file: .env
+    build:
+      context: .
+      args:
+        PORT: ${PORT}
+        APP_DIR: ${APP_DIR}
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - .:${APP_DIR}
+      - ${APP_DIR}node_modules
+    depends_on:
+      - mongo
