@@ -5,7 +5,9 @@ const urlValidator = [
     .notEmpty()
     .withMessage('url is required')
     .isURL()
-    .withMessage('please input a valid url')
+    .withMessage(
+      'Please input a valid url. \n Example: https://www.urlshortener.com'
+    )
     .trim(),
 ];
 
