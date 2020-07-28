@@ -1,9 +1,8 @@
 FROM node:erbium
 
-ARG PORT
-ARG APP_DIR
+RUN mkdir -p /app
 
-WORKDIR ${APP_DIR}
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -11,6 +10,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE ${PORT}
+EXPOSE ${CLIENT_PORT}
 
 CMD [ "npm", "run", "serve" ]

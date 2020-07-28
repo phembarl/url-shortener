@@ -37,7 +37,6 @@ Create a `.env` file in the root directory and configure like so:
 
 ```
 PORT=<PORT>
-CLIENT_PORT=<CLIENT_PORT>
 APP_DIR=<APP_DIR>
 mongodb_HOSTNAME=<mongodb_HOSTNAME>
 mongodb_PORT=<mongodb_PORT>

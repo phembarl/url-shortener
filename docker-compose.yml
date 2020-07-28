@@ -26,7 +26,6 @@ services:
         APP_DIR: ${APP_DIR}
     ports:
       - ${PORT}:${PORT}
-      - 5001:5001
     volumes:
       - .:${APP_DIR}
       - ${APP_DIR}node_modules
@@ -34,18 +33,14 @@ services:
       - mongo
     environment:
       - PORT=5000
-      - CLIENT_PORT=5001
       - APP_DIR=/app
       - DATABASE_URL=mongodb://mongo:27017/url-shortener-db
-  # client:
-  #   build: .
-  #   ports:
-  #     - ${CLIENT_PORT}:${CLIENT_PORT}
-  #   volumes:
-  #     - ./src/client${APP_DIR}
-  #     - ${APP_DIR}node_modules
-  #   depends_on:
-  #     - app
-  #   environment:
-  #     - VUE_APP_SERVER_URL=http://localhost:5000/urls
-  #     - CLIENT_PORT=8080
+  client:
+    build: ./src/client
+    ports:
+      - ${CLIENT_PORT}:${CLIENT_PORT}
+    depends_on:
+      - app
+    environment:
+      - VUE_APP_SERVER_URL=http://localhost:5000/urls
+      - CLIENT_PORT=8080
