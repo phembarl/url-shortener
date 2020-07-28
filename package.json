@@ -9,6 +9,7 @@
     "client": "cd src/client && npm run serve",
     "postinstall": "cd src/client && npm install",
     "dev": "concurrently -n 'server,client' -c 'yellow,green' \"nodemon -r dotenv/config src/index.ts\" \"npm run client\"",
+    "serve": "nodemon -r dotenv/config src/index.ts",
     "build": "tsc"
   },
   "author": "Femi Balogun",
