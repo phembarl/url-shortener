@@ -28,7 +28,7 @@ export default Vue.extend({
     shortenUrl(urlAddress: string) {
       this.errorMsg = '';
       axios
-        .post('http://localhost:5000/urls/shorten', { url: urlAddress })
+        .post(`${process.env.VUE_APP_SERVER_URL}/shorten`, { url: urlAddress })
         .then(res => (this.urls = [...this.urls, res.data.data]))
         .catch(error => {
           this.errorMsg = error.response.data.message.url;
@@ -37,7 +37,7 @@ export default Vue.extend({
   },
   mounted() {
     axios
-      .get('http://localhost:5000/urls')
+      .get(`${process.env.VUE_APP_SERVER_URL}`)
       .then(res => (this.urls = res.data.urls))
       .catch(error => console.log(error));
   },
@@ -55,5 +55,9 @@ export default Vue.extend({
 
 .error {
   color: red;
+  background-color: #fff;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
